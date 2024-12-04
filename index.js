@@ -20,6 +20,7 @@ app.use(express.static(resolve("frontend/dist")));
 // Configuración de Socket.io
 io.on("connection", (socket) => {
   console.log(`Cliente conectado: ${socket.id}`);
+  socket.emit("message", { body: "Hola", from: "Servidor" }); // Enviar un "Hola" al cliente
   socket.on("message", (body) => {
     socket.broadcast.emit("message", {
       body,
